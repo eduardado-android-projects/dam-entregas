@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textViewCartel;
     private Button btnToast;
     private Button btnCount;
+    private Button btnReset;
     //variables globales
 
 
@@ -32,8 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewCartel = findViewById(R.id.cartel);
         btnCount = findViewById(R.id.btnCount);
         btnToast = findViewById(R.id.btnToast);
+        btnReset = findViewById(R.id.btn_reset);
         btnCount.setOnClickListener(this);
         btnToast.setOnClickListener(this);
+        btnReset.setOnClickListener(this);
 
         loadSavedNumber();
 
@@ -52,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.apply();
     }
 
+    private void premio(){
+        Toast.makeText(this, "¡PREMIO!", Toast.LENGTH_LONG).show();
+    }
+
     @Override
     public void onClick(View v) {
         Integer valorActual = Integer.parseInt(String.valueOf(textViewCartel.getText()));
@@ -63,7 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             textViewCartel.setText(valorIncrementado.toString());
             saveNumber(valorIncrementado); //Guarda en memoria permanente de manera inmediata
+            if(valorIncrementado == 5){
+                premio();
+            }
             //todo probar en onStop()
+        }else if(v.getId() == R.id.btn_reset){
+            Integer valorReset = 0;
+            textViewCartel.setText(valorReset.toString());
+            saveNumber(0);
         }
     }
 
