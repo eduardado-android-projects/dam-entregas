@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //debug
     private static final String TAG = "MainActivity";
-    //
+    //cte para SharedPreferences
     public static final String VALOR_CUENTA_ACTUAL = "valorCuentaActual";
     //gui components
     private TextView textViewCartel;
@@ -42,17 +43,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /** Guarda en la vista el número guardado previamente en preferencias
+     *
+     */
     private void loadSavedNumber() {
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contador), MODE_PRIVATE);
         Integer valorGuardado = sharedPreferences.getInt(VALOR_CUENTA_ACTUAL, 0);
         textViewCartel.setText(valorGuardado.toString());
     }
 
+    /** Guarda el número en preferencias
+     *
+     * @param number
+     */
     private void saveNumber(Integer number){
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contador), MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(VALOR_CUENTA_ACTUAL, number);
-        editor.apply();
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contador), MODE_PRIVATE); //carga objeto SharedPreferencces
+        SharedPreferences.Editor editor = sharedPreferences.edit(); //Abre fichero de preferencias .xml en modo edición
+        editor.putInt(VALOR_CUENTA_ACTUAL, number); //guarda en el editor el valor pasado como parámetro
+        editor.apply(); //guarda el valor almacenado en el editor en el archivo de preferencias
     }
 
     private void premio(){
@@ -73,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(valorIncrementado == 5){
                 premio();
             }
-            //todo probar en onStop()
         }else if(v.getId() == R.id.btn_reset){
             Integer valorReset = 0;
             textViewCartel.setText(valorReset.toString());
@@ -81,5 +88,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onStop() {
+        Log.i(TAG, "onStop: ");
+        super.onStop();
+    }
 
+    @Override
+    protected void onResume() {
+        Log.i(TAG, "onResume: ");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.i(TAG, "onStart: ");
+        super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "onDestroy: ");
+        super.onDestroy();
+    }
 }
