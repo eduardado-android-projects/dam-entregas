@@ -1,19 +1,8 @@
-## Entregas
+## Prácticas Mayores Segundo Trimestre
 
-- [Entregas](#entregas)
-  - [Contador](#contador)
-  - [Intents Implícitos](#intents-implícitos)
-    - [Explicaciones](#explicaciones)
-    - [Código Usado](#código-usado)
-
-### Contador
-
+### Contador Práctica n2
 <details>
-<summary>GUI Requerida</summary>
-
-![Imgur](https://i.imgur.com/VSQrxDl.png)
-
-</details>
+<summary>Instrucciones</summary>
 
 - Toast: Se mostrará un mensaje Toast con la cuenta actual.
 - Count: Sumara uno a la actual cuenta.
@@ -23,25 +12,42 @@
   - Incluir botón “CERO” para reiniciar la cuenta.
   - El título del activity será: Hello + Nombre
 
-### Intents Implícitos
+![Imgur](https://i.imgur.com/VSQrxDl.png)
+
+</details>
+
+### Intents Implícitos Práctica n3
 
 <details>
-<summary>GUI requerida</summary>
+<summary>Resultado</summary>
 
-![](2021-01-31-10-01-17.png)
+![gif](https://media.giphy.com/media/YKDZ7QXoBX19PUlgZq/giphy.gif)
 </details>
 
 
-En esta práctica, tenéis que crear una aplicación que envía un intent implícito para realizar cada una de las siguientes tareas:
+
+<details>
+<summary>Práctica 3 Instrucciones</summary>
+
+  En esta práctica, tenéis que crear una aplicación que envía un intent implícito para realizar cada una de las siguientes tareas:
     • Abrir una URL en un navegador web.
     • Abrir una ubicación en un mapa.
     • Compartir texto.
 
-Compartir (enviar información a otras personas a través del correo electrónico o las redes sociales) es una característica popular en muchas aplicaciones. Para la acción de compartir, usa ShareCompat.IntentBuilder, lo que facilita la creación de una intención implícita para compartir datos.
+  Compartir (enviar información a otras personas a través del correo electrónico o las redes sociales) es una característica popular en muchas aplicaciones. Para la acción de compartir, usa ShareCompat.IntentBuilder, lo que facilita la creación de una intención implícita para compartir datos.
 
-Como actividad de ampliación podéis crear un receptor con un intent simple que acepta un intent implícito para una acción específica.
+  Como actividad de ampliación podéis crear un receptor con un intent simple que acepta un intent implícito para una acción específica.
 
-#### Explicaciones
+</details>
+
+<details>
+<summary>Explicación</summary>
+
+Esta práctica consta de dos proyectos o apps en Android.
+  1. ImplicitIntentsPractica 3: Aplicación que lanza 3 tipos distintos de Intents
+  2. IntentReceiverPractica 3: Una aplicación que recibe Intents que lanzan URL
+     1. Muestra la URL contenida en el Intent
+     2. Da la opción de lanzar el enlace en un vagegador
 
 1. Creamos Layout con 3 EditText + 3 Button
    1. LinearLayout con orientación vertical
@@ -57,7 +63,7 @@ Como actividad de ampliación podéis crear un receptor con un intent simple que
             <item name="android:gravity">center</item>
           </style>
       ```
-      4. Añado el estilo en el EditText
+      1. Añado el estilo en el EditText
         ```xml
         style="@style/shareText"
         ```
@@ -67,8 +73,8 @@ Como actividad de ampliación podéis crear un receptor con un intent simple que
         android:onClick="shareText"
       />
     ```
-   4. Creo variable de clase y referencio el View
-   5. Implemento el método referenciado en onClick
+2. Creo variable de clase y referencio el View
+3. Implemento el método referenciado en onClick
    ```java
     public void visitWebSite(View view) {
         String url = mWebSiteEditText.getText().toString(); //Obtengo el String del EditText
@@ -84,19 +90,49 @@ Como actividad de ampliación podéis crear un receptor con un intent simple que
         }
     }
    ```
-   6. Implemento el Intent para abir localización en google maps. El Intent tiene la misma acción. Sólo cambia el string que le pasamos en la petición
+4. Implemento el Intent para abir localización en google maps. El Intent tiene la misma acción. Sólo cambia el string que le pasamos en la petición
    ```java
     Uri locUri = Uri.parse( //parseamos la localización
                 "geo:0,0?q=" //geo search query
                 + location //se añade el texto a la peticón
         );
    ```
-   7. Implemento shareText(). Me valgo de la clase ShareCompat.IntentBuilder.
+5. Implemento shareText(). Un intent que me permite compartir texto con las aplicaciones disponibles que puedan usarlo.
+Me valgo de la clase ShareCompat.IntentBuilder.
+
+IntentReceiverPractica3
+
+  Una aplicación que, cuando está abierta, permite recibir URLs lanzadas desde otro Intent
+
+  1. Preparación del layout
+  2. Creación del intent-filter. Vemos que nuestra aplicación sólo abrirá direcciones con protocolo https y que pertenezca
+  al dominio "eduardado.github.io", de lo contrario serán recogidas por el navegador por defecto del móvil.
+  ```xml
+    <intent-filter >
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data
+                android:scheme="https"
+                android:host="eduardado.github.io" />
+    </intent-filter>
+  ```
+  3. Implementar la recogida del Intent
+
+  ```java
+    Intent intent = getIntent();
+          Uri uri = intent.getData();
+          if (uri != null) {
+              String uriString = uri.toString();
+              mWebSiteEditText.setText(uriString);
+
+          }
+  ```
+
+
+</details>
+
+
+
    
 
-#### Código Usado
-- Uri: parse()
-  - "geo:0,0?q=<localizacion>"
-- Intent: new Intent(ACTION,DATA)
-  - ACTIONS: Intent.ACTION_VIEW
-- ShareCompat.IntentBuilder: from();
