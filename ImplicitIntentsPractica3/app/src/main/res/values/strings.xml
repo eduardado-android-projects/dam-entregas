@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">IplicitIntentsPractica3</string>
+
+    <string name="edittext_uri">https://eduardado.github.io/</string>
+    <string name="button_uri">Abrir Página Web</string>
+
+    <string name="edittext_loc">CEU Andalucía Bormujos</string>
+    <string name="button_loc">Abrir Localización</string>
+
+    <string name="edittext_share">Bienvenido al desierto de lo real...</string>
+    <string name="button_share">Compartir Este Texto</string>
+</resources>
