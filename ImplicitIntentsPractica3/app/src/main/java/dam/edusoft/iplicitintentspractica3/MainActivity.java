@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private EditText mWebSiteEditText;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         mWebSiteEditText = findViewById(R.id.editText_uri);
         mLocationEditText = findViewById(R.id.editText_loc);
         mSharedEditText = findViewById(R.id.editText_share);
+
+
     }
 
     public void visitWebSite(View view) {

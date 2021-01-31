@@ -2,6 +2,8 @@
     <string name="app_name">IplicitIntentsPractica3</string>
 
     <string name="edittext_uri">https://eduardado.github.io/</string>
+    <!--<string name="edittext_uri">http://developer.android.com/</string>-->
+
     <string name="button_uri">Abrir Página Web</string>
 
     <string name="edittext_loc">CEU Andalucía Bormujos</string>
