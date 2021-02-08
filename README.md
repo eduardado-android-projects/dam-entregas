@@ -132,7 +132,30 @@ IntentReceiverPractica3
 
 </details>
 
+### WikiApiVolleyP4
 
+<details>
+<summary>Requerimientos</summary>
 
-   
+   1. Crear un listado (con un objeto personalizado: nombre, código, descripción, etc.) 
+   usando RecycledView. 
+   2. Usar Glide para mostrar imágenes dentro del listado: Usando http y https. 
+   3. Implementar para ambos el método OnClick. 
+   4. Al acceder al detalle de cada uno de los elementos realizar una búsqueda dentro de la 
+   Wikipedia usando su API REST para buscar resultados relacionados con el detalle. 
+   https://es.wikipedia.org/w/api.php?action=query&list=search&srsearch=%TEXTO_BUS
+   QUEDA%&format=json.
+   5. Implementar un botón que genere una notificación con alguna propiedad del objeto 
+   que tengamos en el detalle.
 
+</details>
+
+<details>
+<summary>Explicación</summary>
+
+1. Creo el dataset.
+   1. Modelo: Animal
+   2. Dataset: Simulo acceso a una BD con la clase DatasetAnimales 
+2. Creo adaptador
+   1. 
+</details>
