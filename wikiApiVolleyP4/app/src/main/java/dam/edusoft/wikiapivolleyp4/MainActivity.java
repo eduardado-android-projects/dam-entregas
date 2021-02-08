@@ -7,6 +7,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
@@ -15,10 +17,15 @@ import android.view.MenuItem;
 
 import java.util.LinkedList;
 
-import dam.edusoft.wikiapivolleyp4.model.Game;
+import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
+import dam.edusoft.wikiapivolleyp4.service.GameService;
 
 public class MainActivity extends AppCompatActivity {
 
+    private GameService mGameService;
+    private LinkedList<Game> mGameLinkedList;
+    private RecyclerView mRecyclerView;
+    private GameListAdapter mGameListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        //DATA<->ADAPTER IMPLEMENTATION
+
+        mGameService = new GameService(); // Create an instance of Service class
+        mGameLinkedList = mGameService.getAllGames(); // Request Data
+
+        mRecyclerView = findViewById(R.id.recyclerView); //handle for RecyclerView
+        mGameListAdapter = new GameListAdapter(this,mGameLinkedList); // Instance of Adapter
+        mRecyclerView.setAdapter(mGameListAdapter); //sets the adapter
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this)); //sets the LayoutManager
+
 
 
 

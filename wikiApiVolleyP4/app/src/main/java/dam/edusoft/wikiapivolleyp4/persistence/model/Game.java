@@ -1,4 +1,4 @@
-package dam.edusoft.wikiapivolleyp4.model;
+package dam.edusoft.wikiapivolleyp4.persistence.model;
 
 public class Game {
 
