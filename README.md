@@ -1,6 +1,21 @@
-## Prácticas Mayores Segundo Trimestre
+# Prácticas Mayores Segundo Trimestre
 
-### Contador Práctica n2
+## Cafesito Práctica n1: CRUD en Android
+
+<details>
+  <summary>Cafesito (v1.0)</summary>
+
+![Democafesito](https://media.giphy.com/media/Zx9ZcMmvuyMi4Zelk4/giphy.gif)
+</details>
+
+
+<details>
+  <summary>Cafesito (v1.1)SharedProperties</summary>
+
+![preferences](https://media.giphy.com/media/8LyxgapqBqkhpQSZ7S/giphy.gif)
+</details>
+
+## Contador Práctica n2
 <details>
 <summary>Instrucciones</summary>
 
@@ -16,7 +31,13 @@
 
 </details>
 
-### Intents Implícitos Práctica n3
+<details>
+  <summary>Demo Contador</summary>
+
+  
+</details>
+
+## Intents Implícitos Práctica n3
 
 <details>
 <summary>Resultado</summary>
@@ -132,7 +153,7 @@ IntentReceiverPractica3
 
 </details>
 
-### WikiApiVolleyP4
+## WikiApiVolleyP4
 
 <details>
 <summary>Requerimientos</summary>
