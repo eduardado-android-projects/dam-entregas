@@ -1,11 +1,13 @@
 package dam.edusoft.wikiapivolleyp4;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +20,7 @@ import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameViewHolder> {
 
+    private static final String TAG = "GameListAdapter";
     private final LinkedList<Game> mGameLinkedList;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
@@ -59,7 +62,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
         return mGameLinkedList.size();
     }
 
-    public class GameViewHolder extends RecyclerView.ViewHolder {
+    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         //Global scope variables for each View of "gamelist_item.xml"
         public final ImageView mImageViewCover;
@@ -78,6 +81,17 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
             mTextViewDeveloper = itemView.findViewById(R.id.textViewDeveloper);
 
             mGameListAdapter = gameListAdapter;
+
+            itemView.setOnClickListener(this); //connect the listener with the View
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            Integer mPosition = getLayoutPosition(); //position of the item clicked
+            Game game = mGameLinkedList.get(mPosition); //object Game clicked
+
+            Log.d(TAG, "onClick: " + game.getName());
 
         }
     }
