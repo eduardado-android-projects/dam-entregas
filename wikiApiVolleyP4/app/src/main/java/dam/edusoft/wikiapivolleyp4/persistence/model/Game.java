@@ -6,15 +6,17 @@ public class Game {
     private String developer;
     private String yearRelease;
     private String urlPhoto;
+    private String songName;
 
     public Game() {
     }
 
-    public Game(String name, String developer, String yearRelease, String urlPhoto) {
+    public Game(String name, String developer, String yearRelease, String urlPhoto, String songName) {
         this.name = name;
         this.developer = developer;
         this.yearRelease = yearRelease;
         this.urlPhoto = urlPhoto;
+        this.songName = songName;
     }
 
     public String getName() {
@@ -49,13 +51,22 @@ public class Game {
         this.urlPhoto = urlPhoto;
     }
 
+    public String getSongName() {
+        return songName;
+    }
+
+    public void setSongName(String songName) {
+        this.songName = songName;
+    }
+
     @Override
     public String toString() {
-        return "Juego{" +
+        return "Game{" +
                 "name='" + name + '\'' +
                 ", developer='" + developer + '\'' +
                 ", yearRelease='" + yearRelease + '\'' +
                 ", urlPhoto='" + urlPhoto + '\'' +
+                ", songName='" + songName + '\'' +
                 '}';
     }
 }

@@ -51,7 +51,7 @@ public class Music {
 
         public static final Integer STARCRAFT_XML = R.raw.terran;
         public static final Integer DOOM_XML = R.raw.doom;
-        public static final Integer MONKEY_XML = R.raw.terran;
+        public static final Integer MONKEY_XML = R.raw.monkey;
         public static final Integer TENTACLE_XML = R.raw.tentacle;
         public static final Integer ANOTHER_XML = R.raw.another;
     }

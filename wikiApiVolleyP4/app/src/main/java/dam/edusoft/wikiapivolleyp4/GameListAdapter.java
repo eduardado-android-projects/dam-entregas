@@ -1,10 +1,12 @@
 package dam.edusoft.wikiapivolleyp4;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.LinkedList;
 
+import dam.edusoft.wikiapivolleyp4.music.Music;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameViewHolder> {
@@ -24,9 +27,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
     private final LinkedList<Game> mGameLinkedList;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
+    private MediaPlayer mediaPlayer;
 
     //The constructor receives the Activity and the data
-    public GameListAdapter(Context context, LinkedList<Game> gameLinkedList){
+    public GameListAdapter(Context context, LinkedList<Game> gameLinkedList) {
         mLayoutInflater = LayoutInflater.from(context); //load the inflater using the Activity
         this.mGameLinkedList = gameLinkedList; //assign data reference to the adapter
         mContext = context;
@@ -36,9 +40,9 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
     @Override
     public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //creates a View
-        View mItemView = mLayoutInflater.inflate(R.layout.gamelist_item,parent,false);
+        View mItemView = mLayoutInflater.inflate(R.layout.gamelist_item, parent, false);
 
-        return new GameViewHolder(mItemView,this); //it passes a ViewGroup & the Adapter to the ViewHolder
+        return new GameViewHolder(mItemView, this); //it passes a ViewGroup & the Adapter to the ViewHolder
     }
 
     @Override
@@ -62,13 +66,15 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
         return mGameLinkedList.size();
     }
 
-    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //Global scope variables for each View of "gamelist_item.xml"
         public final ImageView mImageViewCover;
         public final TextView mTextViewTitle;
         public final TextView mTextViewYear;
         public final TextView mTextViewDeveloper;
+        public final ImageButton imageButtonPlay;
+        public final ImageButton imageButtonStop;
 
         final GameListAdapter mGameListAdapter; //A reference to the adapter
 
@@ -79,19 +85,47 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
             mTextViewTitle = itemView.findViewById(R.id.textViewTitle);
             mTextViewYear = itemView.findViewById(R.id.textViewYear);
             mTextViewDeveloper = itemView.findViewById(R.id.textViewDeveloper);
+            imageButtonPlay = itemView.findViewById(R.id.imageButtonPlay);
+            imageButtonStop = itemView.findViewById(R.id.imageButtonStop);
 
             mGameListAdapter = gameListAdapter;
 
-            itemView.setOnClickListener(this); //connect the listener with the View
+            //itemView.setOnClickListener(this); //connect the listener with the View
+
+            imageButtonPlay.setOnClickListener(this);
+            imageButtonStop.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View v) {
-            Integer mPosition = getLayoutPosition(); //position of the item clicked
-            Game game = mGameLinkedList.get(mPosition); //object Game clicked
 
-            Log.d(TAG, "onClick: " + game.getName());
+            switch (v.getId()){
+                case R.id.imageButtonPlay:{
+                    Integer mPosition = getLayoutPosition(); //position of the item clicked
+                    Game game = mGameLinkedList.get(mPosition); //object Game clicked
+
+                    Log.d(TAG, "onClick: " + game.getSongName());
+                    Music music = new Music(mContext);
+
+                    if(mediaPlayer != null && mediaPlayer.isPlaying()){
+                        mediaPlayer.stop();
+                    }
+
+                    mediaPlayer = music.getSong(game.getSongName());
+                    mediaPlayer.start();
+                    break;
+
+                } case R.id.imageButtonStop:{
+                    if(mediaPlayer != null && mediaPlayer.isPlaying()){
+                        mediaPlayer.stop();
+                    }
+                    break;
+                }
+            }
+
+
+
 
         }
     }
