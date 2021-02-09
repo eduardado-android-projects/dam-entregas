@@ -174,9 +174,38 @@ IntentReceiverPractica3
 <details>
 <summary>Explicación</summary>
 
-1. Creo el dataset.
-   1. Modelo: Animal
-   2. Dataset: Simulo acceso a una BD con la clase DatasetAnimales 
-2. Creo adaptador
-   1. 
+ 
+</details>
+
+<details>
+<summary>TODO</summary>
+
+- [ ] Añadir botón al menú con un stop 
+- [ ] Cambiar imageview stop por icono wikipedia -> Crea una notificación cuyo contenido es lo que devuelve la wikipedia
+- [ ] 
+</details>
+
+<details>
+<summary>Notas</summary>
+
+- Si usamos esta [direccion http](https://es.wikipedia.org/w/api.php?action=query&list=search&srsearch=%25The_Secret_of_monkey_island&format=json) la API de Wiki pedia nos devuelve directamente un JSON
+
+
+
+
+- Usando esta [dirección](https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=18630637&inprop=url) podemos obtener al url si metemos un pageID
+-> Page id de The Secret of Monkey Island: 1139902
+
+https://en.wikipedia.org/?curid=18630637
+
+https://en.wikipedia.org/?curid=228232
+
+https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=1139902&inprop=url
+https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=58594&inprop=url
+
+
+- con este enlace podemos buscar en [wikidata](https://www.wikidata.org/w/index.php?search=Aaadonta+angaurana&title=Special:Search&fulltext=1)
+
+https://www.wikidata.org/w/index.php?search=the+secret+of+monkey+island&title=Special:Search&fulltext=1
+https://www.wikidata.org/w/index.php?search=the+secret+of+monkey+island&title=Special:Search&fulltext=1&format=json
 </details>
