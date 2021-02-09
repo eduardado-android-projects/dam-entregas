@@ -9,47 +9,67 @@
 
     <ImageView
             android:id="@+id/imageViewCover"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="126dp"
+            android:layout_height="123dp"
             app:srcCompat="@drawable/ic_launcher_background"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" />
+            android:layout_marginTop="36dp"
+            android:layout_marginStart="4dp" />
 
     <TextView
             android:id="@+id/textViewTitle"
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/imageViewCover"
-            app:layout_constraintBottom_toTopOf="@+id/textViewYear"
-            app:layout_constraintStart_toEndOf="@+id/imageViewCover"
-            android:layout_marginStart="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewCover" />
 
     <TextView
             android:id="@+id/textViewYear"
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/imageViewCover"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewCover"
-            app:layout_constraintStart_toEndOf="@+id/imageViewCover"
-            android:layout_marginStart="8dp"
             android:textSize="16sp"
-            app:layout_constraintVertical_bias="0.398" />
+            android:layout_marginStart="9dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCover" />
 
     <TextView
             android:id="@+id/textViewDeveloper"
             android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewCover"
-            app:layout_constraintTop_toBottomOf="@+id/textViewYear"
+            android:layout_width="67dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/imageViewCover"
-            android:layout_marginStart="8dp" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewYear" />
+
+    <ImageButton
+            android:layout_width="66dp"
+            android:layout_height="65dp"
+            app:srcCompat="@drawable/ic_baseline_play_circle_24"
+            android:id="@+id/imageButtonPlay"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewCover"
+            app:layout_constraintEnd_toStartOf="@+id/imageButtonStop"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="7dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+            app:layout_constraintHorizontal_bias="1.0" />
+
+    <ImageButton
+            android:layout_width="69dp"
+            android:layout_height="62dp"
+            app:srcCompat="@drawable/ic_baseline_stop_24"
+            android:id="@+id/imageButtonStop"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewCover"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="36dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
