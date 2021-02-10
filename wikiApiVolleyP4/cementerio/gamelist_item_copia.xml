@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:padding="5dp">
+
+    <ImageView
+            android:id="@+id/imageViewCover"
+            android:layout_width="126dp"
+            android:layout_height="123dp"
+            app:srcCompat="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            android:layout_marginTop="8dp" />
+
+    <TextView
+            android:id="@+id/textViewTitle"
+            android:text="TextView"
+            android:layout_width="392dp"
+            android:layout_height="31dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <TextView
+            android:id="@+id/textViewYear"
+            android:text="TextView"
+            android:layout_width="123dp"
+            android:layout_height="22dp"
+            android:textSize="18sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCover" />
+
+    <TextView
+            android:id="@+id/textViewDeveloper"
+            android:text="TextView"
+            android:layout_width="115dp"
+            android:layout_height="23dp"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewYear"
+            android:textAlignment="center"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+            android:layout_width="66dp"
+            android:layout_height="65dp"
+            app:srcCompat="@drawable/ic_baseline_play_circle_24"
+            android:id="@+id/imageButtonPlay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageButtonStop"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+            android:layout_marginStart="24dp" />
+
+    <ImageButton
+            android:layout_width="71dp"
+            android:layout_height="65dp"
+            app:srcCompat="@drawable/ic_baseline_stop_24"
+            android:id="@+id/imageButtonStop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

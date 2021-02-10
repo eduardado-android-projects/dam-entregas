@@ -172,17 +172,126 @@ IntentReceiverPractica3
 </details>
 
 <details>
-<summary>Explicación</summary>
+<summary>Explicaciones</summary>
+
 
  
 </details>
 
+### Hacer cada ítem del RecyclerView clickable
+1. Dentro de la clase adaptadora "GameRecyclerViewAdapter", definimos una interfaz "OngameListener", que define un método "onGameClick()" que deberá ser implementado por aquella clase que implemente esta interfaz. Nótese que este último método recibirá por parámetro un Integer, que corresponde a la posición del ítem en el que estamos haciendo click dentro del LinkedList que contiene los datos.
+  ```java
+  public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
+    //...
+    public interface OnGameListenerInterface{
+            void onGameClick(Integer position);
+        }
+  }
+  ```
+2. La clase ViewHolder que está anidada dentro de nuestra clase adaptadora, en nuestro caso "GameViewHolder", deberá implementar la clase "View.OnClickListener". Dicho listener, tendrá que ser también asignado al ítem sobre el que se está haciendo click.
+```java
+public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{ //1
+  //...
+  public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListener onGameListener) {
+    //...
+    itemView.setOnClickListener(this);//2
+  }
+
+  @Override
+        public void onClick(View v) {
+            //uso de la interfaz (lo veremos luego)
+        }
+}
+```
+3. Fuera de esta clase, dentro de MainActivity, tendremos que implementar la interfaz del paso nº1 "OnGameListenerInterface"
+```java
+  public class MainActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {}
+```
+4. Una vez hacemos que la clase implemente la interfaz, tendremos que implementar el método onClick que dicha interfaz define
+  ```java
+    @Override
+        public void onGameClick(Integer position) {
+            Intent intent = new Intent(this, GameDetailsActivity.class); //cambia a otra Activity
+            startActivity(intent);
+        }
+  ```
+5. Tenemos ahora que asegurarnos que, cuando instanciamos la clase adaptadora, ésta recibe por parámetro no sólo el Activity y el linkedList con los datos, sino también la interfaz (definida por la propia clase)
+```java
+mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
+                this, //El Activity
+                mGameLinkedList, //los datos
+                this); // La interfaz (también implementada por esta clase)
+```
+6. Queda gestionar cómo la referencia de la interfaz que hemos definido en el MainActivity llega hasta la clase anidada
+   1. Definir una variable de clase
+   ```java
+    public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
+      private OnGameListenerInterface mOnGameListenerInterface;
+      //...
+    }
+   ```
+   2. Pasarle la referencia a la instancia de la interfaz en el constructor
+   ```java
+   public GameRecyclerViewAdapter(Context context, LinkedList<Game> gameLinkedList, OnGameListenerInterface onGameListener) {
+        //...
+        mOnGameListenerInterface = onGameListener;
+    }
+   ```
+   3. Dentro del método que instancia cada ViewHolder (GameViewHolder en nuestro caso). Hay que pasarle la isntancia de la interfaz
+    ```java
+      @NonNull
+      @Override
+      public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+          //...
+          return new GameViewHolder(mItemView, this, mOnGameListenerInterface); //<-aquí
+      }
+    ```
+   4. La clase anidada GameViewHolder, lo recibe en su constructor y lo asigna a la clase
+   ```java
+   public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        //..
+
+        private OnGameListenerInterface onGameListenerInterface;
+
+
+        public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListenerInterface onGameListener) {
+            //..
+            this.onGameListenerInterface = onGameListener; //<-aquí
+
+        }
+    }
+   
+   ```
+   5. Finalmente, a través del método getAdapterPosition() de la clase Adapter, le pasamos a la interfaz la posición del ítem. Lo que ocurrirá es que, cada vez que se hace
+
+   ```java
+   public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+      //..
+        @Override
+        public void onClick(View v) {
+            onGameListenerInterface.onGameClick(getAdapterPosition());
+        }
+
+    }
+   
+   ```
+    
+
+
 <details>
 <summary>TODO</summary>
 
-- [ ] Añadir botón al menú con un stop 
-- [ ] Cambiar imageview stop por icono wikipedia -> Crea una notificación cuyo contenido es lo que devuelve la wikipedia
-- [ ] 
+- [x] Hacer los ítem más sencillos: nombre + foto.
+- [x] User Gridlayout Manager en lugar de LinearLayoutManager
+- [x] Al pulsar el ítem te lleva a otra Activity con los detalles.
+- [ ] Implementar el listener usando una interfaz (buenas prácticas)
+- [ ] El Activity con detalles muestra Foto, Nombre y además año, desarrollador
+- [ ] El Activity detalles tiene un botón que, al pulsarlo, se consulta a la Wikipedia. La wikipedia devuelve un JSON que se mostrará en un textView abajo.
+
+IDEAS
+- [ ] Mostrar en el detalle un vídeo incrustado de youtube con gampeplay del juego.
 </details>
 
 <details>
@@ -193,19 +302,26 @@ IntentReceiverPractica3
 
 
 
-- Usando esta [dirección](https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=18630637&inprop=url) podemos obtener al url si metemos un pageID
--> Page id de The Secret of Monkey Island: 1139902
 
-https://en.wikipedia.org/?curid=18630637
+</details>
 
-https://en.wikipedia.org/?curid=228232
+## Notificaciones (Práctica 5)
 
-https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=1139902&inprop=url
-https://en.wikipedia.org/w/api.php?action=query&prop=info&pageids=58594&inprop=url
+<details>
+<summary>Explicaciones</summary>
+
+1. Creamos un canal para las notificaciones (buenas prácticas)
+   1. Creamos una constante con el ID del canal de notificaciones.
+   2. 
 
 
-- con este enlace podemos buscar en [wikidata](https://www.wikidata.org/w/index.php?search=Aaadonta+angaurana&title=Special:Search&fulltext=1)
 
-https://www.wikidata.org/w/index.php?search=the+secret+of+monkey+island&title=Special:Search&fulltext=1
-https://www.wikidata.org/w/index.php?search=the+secret+of+monkey+island&title=Special:Search&fulltext=1&format=json
+</details>
+
+<details>
+<summary>Código usado</summary>
+
+NotificactionChannel
+NotificationManager
+Activity: getSystemService()
 </details>

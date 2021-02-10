@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="dam.edusoft.wikiapivolleyp4">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+        package="dam.edusoft.notificaciones">
 
     <application
             android:allowBackup="true"
@@ -10,12 +8,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.WikiApiVolleyP4">
-        <activity android:name=".GameDetailsActivity"></activity>
-        <activity
-                android:name=".MainActivity"
-                android:label="@string/app_name"
-                android:theme="@style/Theme.WikiApiVolleyP4.NoActionBar">
+            android:theme="@style/Theme.Notificaciones">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
