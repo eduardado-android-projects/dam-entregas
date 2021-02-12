@@ -1,5 +1,12 @@
 # Prácticas Mayores Segundo Trimestre
 
+- [Prácticas Mayores Segundo Trimestre](#prácticas-mayores-segundo-trimestre)
+  - [Cafesito Práctica n1: CRUD en Android](#cafesito-práctica-n1-crud-en-android)
+  - [Contador Práctica n2](#contador-práctica-n2)
+  - [Intents Implícitos Práctica n3](#intents-implícitos-práctica-n3)
+  - [WikiApiVolleyP4](#wikiapivolleyp4)
+  - [Notificaciones (Práctica 5 Subida Nota)](#notificaciones-práctica-5-subida-nota)
+
 ## Cafesito Práctica n1: CRUD en Android
 
 <details>
@@ -34,13 +41,14 @@
 <details>
   <summary>Demo Contador</summary>
 
+![Demo](https://media.giphy.com/media/L6elwwnCxFoIaxDnjx/giphy.gif)
   
 </details>
 
 ## Intents Implícitos Práctica n3
 
 <details>
-<summary>Resultado</summary>
+<summary>Demo Práctica 3</summary>
 
 ![gif](https://media.giphy.com/media/YKDZ7QXoBX19PUlgZq/giphy.gif)
 </details>
@@ -156,6 +164,12 @@ IntentReceiverPractica3
 ## WikiApiVolleyP4
 
 <details>
+<summary>Demo Práctica 4 (sin sonido)</summary>
+
+![Demo](https://media.giphy.com/media/AE7V6FVMZtPNHwI2JE/giphy.gif)
+</details>
+
+<details>
 <summary>Requerimientos</summary>
 
    1. Crear un listado (con un objeto personalizado: nombre, código, descripción, etc.) 
@@ -174,140 +188,152 @@ IntentReceiverPractica3
 <details>
 <summary>Explicaciones</summary>
 
-<details>
-<summary>Hacer cada ítem del RecyclerView clickable usando una interfaz</summary>
+  <details>
+  <summary>Hacer cada ítem del RecyclerView clickable usando una interfaz</summary>
 
-### Hacer cada ítem del RecyclerView clickable usando una interfaz
+  Hacer cada ítem del RecyclerView clickable usando una interfaz
 
-#### Resumen
+  >Resumen
 
-1. Implementamos OnClickListener en el ViewHolder
-2. Definimos una interfaz con un método que seleccione un objeto Game
-3. Implementamos la interfaz en nuestro Activity
-4. Le pasamos la interfaz al constructor del adaptador
+  1. Implementamos OnClickListener en el ViewHolder
+  2. Definimos una interfaz con un método que seleccione un objeto Game
+  3. Implementamos la interfaz en nuestro Activity
+  4. Le pasamos la interfaz al constructor del adaptador
 
-#### Paso a paso
+  >Paso a paso
 
-1. Dentro de la clase adaptadora "GameRecyclerViewAdapter", definimos una interfaz "OngameListener", que define un método "onGameClick()" que deberá ser implementado por aquella clase que implemente esta interfaz. Nótese que este último método recibirá por parámetro un Integer, que corresponde a la posición del ítem en el que estamos haciendo click dentro del LinkedList que contiene los datos.
-  ```java
-  public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
-    //...
-    public interface OnGameListenerInterface{
-            void onGameClick(Integer position);
-        }
-  }
-  ```
-2. La clase ViewHolder que está anidada dentro de nuestra clase adaptadora, en nuestro caso "GameViewHolder", deberá implementar la clase "View.OnClickListener". Dicho listener, tendrá que ser también asignado al ítem sobre el que se está haciendo click.
-```java
-public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{ //1
-  //...
-  public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListener onGameListener) {
-    //...
-    itemView.setOnClickListener(this);//2
-  }
-
-  @Override
-        public void onClick(View v) {
-            //uso de la interfaz (lo veremos luego)
-        }
-}
-```
-3. Fuera de esta clase, dentro de MainActivity, tendremos que implementar la interfaz del paso nº1 "OnGameListenerInterface"
-```java
-  public class MainActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {}
-```
-4. Una vez hacemos que la clase implemente la interfaz, tendremos que implementar el método onClick que dicha interfaz define
-  ```java
-    @Override
-        public void onGameClick(Integer position) {
-            Intent intent = new Intent(this, GameDetailsActivity.class); //cambia a otra Activity
-            startActivity(intent);
-        }
-  ```
-5. Tenemos ahora que asegurarnos que, cuando instanciamos la clase adaptadora, ésta recibe por parámetro no sólo el Activity y el linkedList con los datos, sino también la interfaz (definida por la propia clase)
-```java
-mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
-                this, //El Activity
-                mGameLinkedList, //los datos
-                this); // La interfaz (también implementada por esta clase)
-```
-6. Queda gestionar cómo la referencia de la interfaz que hemos definido en el MainActivity llega hasta la clase anidada
-   1. Definir una variable de clase
-   ```java
-    public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
-      private OnGameListenerInterface mOnGameListenerInterface;
-      //...
-    }
-   ```
-   2. Pasarle la referencia a la instancia de la interfaz en el constructor
-   ```java
-   public GameRecyclerViewAdapter(Context context, LinkedList<Game> gameLinkedList, OnGameListenerInterface onGameListener) {
-        //...
-        mOnGameListenerInterface = onGameListener;
-    }
-   ```
-   3. Dentro del método que instancia cada ViewHolder (GameViewHolder en nuestro caso). Hay que pasarle la isntancia de la interfaz
+  1. Dentro de la clase adaptadora "GameRecyclerViewAdapter", definimos una interfaz "OngameListener", que define un método "onGameClick()" que deberá ser implementado por aquella clase que implemente esta interfaz. Nótese que este último método recibirá por parámetro un Integer, que corresponde a la posición del ítem en el que estamos haciendo click dentro del LinkedList que contiene los datos.
     ```java
-      @NonNull
+    public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
+      //...
+      public interface OnGameListenerInterface{
+              void onGameClick(Integer position);
+          }
+    }
+    ```
+  2. La clase ViewHolder que está anidada dentro de nuestra clase adaptadora, en nuestro caso "GameViewHolder", deberá implementar la clase "View.OnClickListener". Dicho listener, tendrá que ser también asignado al ítem sobre el que se está haciendo click.
+  ```java
+  public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{ //1
+    //...
+    public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListener onGameListener) {
+      //...
+      itemView.setOnClickListener(this);//2
+    }
+
+    @Override
+          public void onClick(View v) {
+              //uso de la interfaz (lo veremos luego)
+          }
+  }
+  ```
+  3. Fuera de esta clase, dentro de MainActivity, tendremos que implementar la interfaz del paso nº1 "OnGameListenerInterface"
+  ```java
+    public class MainActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {}
+  ```
+  4. Una vez hacemos que la clase implemente la interfaz, tendremos que implementar el método onClick que dicha interfaz define
+    ```java
       @Override
-      public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-          //...
-          return new GameViewHolder(mItemView, this, mOnGameListenerInterface); //<-aquí
+          public void onGameClick(Integer position) {
+              Intent intent = new Intent(this, GameDetailsActivity.class); //cambia a otra Activity
+              startActivity(intent);
+          }
+    ```
+  5. Tenemos ahora que asegurarnos que, cuando instanciamos la clase adaptadora, ésta recibe por parámetro no sólo el Activity y el linkedList con los datos, sino también la interfaz (definida por la propia clase)
+  ```java
+  mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
+                  this, //El Activity
+                  mGameLinkedList, //los datos
+                  this); // La interfaz (también implementada por esta clase)
+  ```
+  6. Queda gestionar cómo la referencia de la interfaz que hemos definido en el MainActivity llega hasta la clase anidada
+    1. Definir una variable de clase
+    ```java
+      public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
+        private OnGameListenerInterface mOnGameListenerInterface;
+        //...
       }
     ```
-   4. La clase anidada GameViewHolder, lo recibe en su constructor y lo asigna a la clase
-   ```java
-   public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    2. Pasarle la referencia a la instancia de la interfaz en el constructor
+    ```java
+    public GameRecyclerViewAdapter(Context context, LinkedList<Game> gameLinkedList, OnGameListenerInterface onGameListener) {
+          //...
+          mOnGameListenerInterface = onGameListener;
+      }
+    ```
+    3. Dentro del método que instancia cada ViewHolder (GameViewHolder en nuestro caso). Hay que pasarle la isntancia de la interfaz
+      ```java
+        @NonNull
+        @Override
+        public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            //...
+            return new GameViewHolder(mItemView, this, mOnGameListenerInterface); //<-aquí
+        }
+      ```
+    4. La clase anidada GameViewHolder, lo recibe en su constructor y lo asigna a la clase
+    ```java
+    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+          //..
+
+          private OnGameListenerInterface onGameListenerInterface;
+
+
+          public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListenerInterface onGameListener) {
+              //..
+              this.onGameListenerInterface = onGameListener; //<-aquí
+
+          }
+      }
+    
+    ```
+    5. Finalmente, a través del método getAdapterPosition() de la clase Adapter, le pasamos a la interfaz la posición del ítem. Lo que ocurrirá es que, cada vez que se hace
+
+    ```java
+    public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         //..
+          @Override
+          public void onClick(View v) {
+              onGameListenerInterface.onGameClick(getAdapterPosition());
+          }
 
-        private OnGameListenerInterface onGameListenerInterface;
+      }
+    
+    ```
+  >Recapitulación: ¿qué ocurre en ejecución?
 
+  1. La clase de lanzamiento, GameListMainActivity, implementa la interfaz GameRecyclerViewAdapter.OnGameListenerInterface.
+    1. Espera recibir una posición 
+    2. Crea un intent hacia otra actividad
+    3. Obtiene la posición del objeto que está siendo pulsado.
+    4. Obtiene el objeto del LinkedList a partir de dicha posición
+    5. Manda dicho objeto en el Intent a otra actividad
+  2. ¿ Por qué recibe la posición el método onGameClick(Integer position)?
+    1. La clase ViewHolder del adaptador implementa la el listener OnClick
+    2. Cada ítem del ViewHolder, recibe el listener en el constructor de su clase por lo que estará "escuchando los clicks"
+    3. Cuando el usuario hace click en cualquier ítem, la clase ViewHolder a través del método getAdapterPosition() le pasa al método onGamkeClick() de la interfaz, la posición del ítem que está siendo clicado.
+  </details>
 
-        public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListenerInterface onGameListener) {
-            //..
-            this.onGameListenerInterface = onGameListener; //<-aquí
+  <details>
+  <summary>Pasar informacion de una Activity a otra Usando Parcelable Objects + Intents</summary>
 
-        }
-    }
-   
-   ```
-   5. Finalmente, a través del método getAdapterPosition() de la clase Adapter, le pasamos a la interfaz la posición del ítem. Lo que ocurrirá es que, cada vez que se hace
+  > Pasar informacion de una Activity a otra Usando Parcelable Objects + Intents
 
-   ```java
-   public class GameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-      //..
-        @Override
-        public void onClick(View v) {
-            onGameListenerInterface.onGameClick(getAdapterPosition());
-        }
-
-    }
-   
-   ```
-#### Recapitulación: ¿qué ocurre en ejecución?
-
-1. La clase de lanzamiento, GameListMainActivity, implementa la interfaz GameRecyclerViewAdapter.OnGameListenerInterface.
-   1. Espera recibir una posición 
-   2. Crea un intent hacia otra actividad
-   3. Obtiene la posición del objeto que está siendo pulsado.
-   4. Obtiene el objeto del LinkedList a partir de dicha posición
-   5. Manda dicho objeto en el Intent a otra actividad
-2. ¿ Por qué recibe la posición el método onGameClick(Integer position)?
-   1. La clase ViewHolder del adaptador implementa la el listener OnClick
-   2. Cada ítem del ViewHolder, recibe el listener en el constructor de su clase por lo que estará "escuchando los clicks"
-   3. Cuando el usuario hace click en cualquier ítem, la clase ViewHolder a través del método getAdapterPosition() le pasa al método onGamkeClick() de la interfaz, la posición del ítem que está siendo clicado.
+  1. Implementar la interfaz Parcelable en el objeto
+    1. Implementar los métodos
+    2. Añadir implementación de Parcelable
+    3. Recibir el Intent
+    ```java
+    Object = getIntent().getParcelableExtra();
+    ```
+  </details>
 </details>
 
-<<details>
-<summary>Pasar informacion de una Activity a otra Usando Parcelable Objects + Intents</summary>
+  <details>
+  <summary>Hacer un Simple Request a la API de Wikipedia usando Volley</summary>
 
-
-</details>>
-
- 
-</details>
+  [Documentacion](https://developer.android.com/training/volley/request)
+  </details>
 
 
 
@@ -319,8 +345,8 @@ mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
 - [x] User Gridlayout Manager en lugar de LinearLayoutManager
 - [x] Al pulsar el ítem te lleva a otra Activity con los detalles.
 - [x] Implementar el listener usando una interfaz (buenas prácticas)
-- [ ] El Activity con detalles muestra Foto, Nombre y además año, desarrollador
-- [ ] El Activity detalles tiene un botón que, al pulsarlo, se consulta a la Wikipedia. La wikipedia devuelve un JSON que se mostrará en un textView abajo.
+- [x] El Activity con detalles muestra Foto, Nombre y además año, desarrollador
+- [x] El Activity detalles tiene un botón que, al pulsarlo, se consulta a la Wikipedia. La wikipedia devuelve un JSON que se mostrará en un textView abajo.
 
 IDEAS
 - [ ] Mostrar en el detalle un vídeo incrustado de youtube con gampeplay del juego.
@@ -337,7 +363,7 @@ IDEAS
 
 </details>
 
-## Notificaciones (Práctica 5)
+## Notificaciones (Práctica 5 Subida Nota)
 
 <details>
 <summary>Explicaciones</summary>
@@ -358,8 +384,3 @@ NotificationManager
 Activity: getSystemService()
 </details>
 
-## Pasar informacion de una Activity a otra Usando Parcelable Objects + Intents
-
-1. Implementar la interfaz Parcelable en el objeto
-   1. Implementar los métodos
-   2. Añadir implementación de Parcelable

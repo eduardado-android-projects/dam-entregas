@@ -10,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
@@ -66,6 +72,34 @@ public class GameDetailsActivity extends AppCompatActivity {
 
     }
 
+    /** Hace una petición a la API de wikipedia e imprime en el textView el resultado
+     *
+     * @param game
+     */
+    private void requestToWikipedia(String game) {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + game + "&limit=11&namespace=0&format=json";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        textViewWikipediaPetitionResult.setText("Response is: "+ response.substring(0,500));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                textViewWikipediaPetitionResult.setText("That didn't work!");
+            }
+        });
+        requestQueue.add(stringRequest);
+
+
+
+
+    }
+
     private void populateLayout() {
         textViewTitle.setText(mGame.getName());
         textViewDeveloper.setText(mGame.getDeveloper());
@@ -89,7 +123,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     }
 
     public void wiki(View view) {
-        /*String peticionHttp = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + gameReplaced + "&limit=11&namespace=0&format=json";*/
+        requestToWikipedia(mGame.getName());
 
 
 
