@@ -1,6 +1,9 @@
 package dam.edusoft.wikiapivolleyp4.persistence.model;
 
-public class Game {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Game implements Parcelable {
 
     private String name;
     private String developer;
@@ -18,6 +21,40 @@ public class Game {
         this.urlPhoto = urlPhoto;
         this.songName = songName;
     }
+
+    protected Game(Parcel in) {
+        name = in.readString();
+        developer = in.readString();
+        yearRelease = in.readString();
+        urlPhoto = in.readString();
+        songName = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(developer);
+        dest.writeString(yearRelease);
+        dest.writeString(urlPhoto);
+        dest.writeString(songName);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Game> CREATOR = new Creator<Game>() {
+        @Override
+        public Game createFromParcel(Parcel in) {
+            return new Game(in);
+        }
+
+        @Override
+        public Game[] newArray(int size) {
+            return new Game[size];
+        }
+    };
 
     public String getName() {
         return name;

@@ -1,4 +1,4 @@
-package dam.edusoft.wikiapivolleyp4;
+package dam.edusoft.wikiapivolleyp4.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,12 @@ import android.view.MenuItem;
 
 import java.util.LinkedList;
 
+import dam.edusoft.wikiapivolleyp4.GameRecyclerViewAdapter;
+import dam.edusoft.wikiapivolleyp4.R;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 import dam.edusoft.wikiapivolleyp4.service.GameService;
 
-public class MainActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {
+public class GameListActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {
 
     private GameService mGameService;
     private LinkedList<Game> mGameLinkedList;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity  implements GameRecyclerView
     public void onGameClick(Integer position) {
 
         Intent intent = new Intent(this, GameDetailsActivity.class);
+        intent.putExtra("game",GameDetailsActivity.class); //
         startActivity(intent);
 
     }

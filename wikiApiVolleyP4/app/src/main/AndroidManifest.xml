@@ -11,9 +11,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.WikiApiVolleyP4">
-        <activity android:name=".GameDetailsActivity"></activity>
+        <activity android:name=".Activity.GameDetailsActivity"></activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".Activity.GameListActivity"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.WikiApiVolleyP4.NoActionBar">
             <intent-filter>
