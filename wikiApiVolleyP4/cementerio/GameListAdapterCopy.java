@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.LinkedList;
 
 import dam.edusoft.wikiapivolleyp4.R;
-import dam.edusoft.wikiapivolleyp4.music.Music;
+import dam.edusoft.wikiapivolleyp4.multimedia.Music;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 
 public class GameListAdapterCopy extends RecyclerView.Adapter<GameListAdapterCopy.GameViewHolder> {

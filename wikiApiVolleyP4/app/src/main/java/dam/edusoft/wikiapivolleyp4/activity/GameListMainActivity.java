@@ -1,4 +1,4 @@
-package dam.edusoft.wikiapivolleyp4.Activity;
+package dam.edusoft.wikiapivolleyp4.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,19 +19,24 @@ import dam.edusoft.wikiapivolleyp4.R;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 import dam.edusoft.wikiapivolleyp4.service.GameService;
 
-public class GameListActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {
+public class GameListMainActivity extends AppCompatActivity  implements GameRecyclerViewAdapter.OnGameListenerInterface {
 
-    private GameService mGameService;
-    private LinkedList<Game> mGameLinkedList;
-    private RecyclerView mRecyclerView;
+    private GameService mGameService; //Clase de servicios
+    private LinkedList<Game> mGameLinkedList; //Estructura de datos
+
+    //RecyclerView
+    private RecyclerView mGameRecyclerView;
     private GameRecyclerViewAdapter mGameRecyclerViewAdapter;
+
+    //Debugging
+    private static final String TAG = "GameListMainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("Good Old Games");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar); //TODO borrar?
         setSupportActionBar(toolbar);
 
 
@@ -39,17 +45,32 @@ public class GameListActivity extends AppCompatActivity  implements GameRecycler
         mGameService = new GameService(); // Create an instance of Service class
         mGameLinkedList = mGameService.getAllGames(); // Request Data
 
-        mRecyclerView = findViewById(R.id.recyclerView); //handle for RecyclerView
+        mGameRecyclerView = findViewById(R.id.recyclerView); //handle for RecyclerView
         mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
                 this, //El Activity
                 mGameLinkedList, //los datos
                 this); // La interfaz (también implementada por esta clase)
-        mRecyclerView.setAdapter(mGameRecyclerViewAdapter); //sets the adapter
+        mGameRecyclerView.setAdapter(mGameRecyclerViewAdapter); //sets the adapter
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-        mRecyclerView.setLayoutManager(gridLayoutManager); //sets the LayoutManager
+        mGameRecyclerView.setLayoutManager(gridLayoutManager); //sets the LayoutManager
 
 
+    }
 
+    @Override
+    public void onGameClick(Integer position) {
+        /*
+        - Para poder mandar un objeto a otro intent necesitamos que implemente la intefaz Parcelable
+        - Para nombrar el Intent usamos el paquete único de la app en el intent + nombre del objeto (buenas prácticas por si recibimos mismo objeto de otra app)
+         */
+        Log.d(TAG, "onGameClick: Has hecho click en el juego : " + mGameLinkedList.get(position).getName());
+
+        Game game = mGameLinkedList.get(position); //el objeto que se mandará en el intent a la otra Activity
+
+        Intent intent = new Intent(this, GameDetailsActivity.class);
+       /* intent.putExtra("dam.edusoft.wikiapivolleyp4.game",game); //*/
+
+        startActivity(intent);
 
     }
 
@@ -73,14 +94,5 @@ public class GameListActivity extends AppCompatActivity  implements GameRecycler
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onGameClick(Integer position) {
-
-        Intent intent = new Intent(this, GameDetailsActivity.class);
-        intent.putExtra("game",GameDetailsActivity.class); //
-        startActivity(intent);
-
     }
 }

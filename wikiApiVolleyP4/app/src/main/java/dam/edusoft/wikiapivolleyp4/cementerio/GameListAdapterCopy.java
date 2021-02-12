@@ -1,12 +1,9 @@
 package dam.edusoft.wikiapivolleyp4.cementerio;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +15,6 @@ import com.bumptech.glide.Glide;
 import java.util.LinkedList;
 
 import dam.edusoft.wikiapivolleyp4.R;
-import dam.edusoft.wikiapivolleyp4.music.Music;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 
 public class GameListAdapterCopy extends RecyclerView.Adapter<GameListAdapterCopy.GameViewHolder> {

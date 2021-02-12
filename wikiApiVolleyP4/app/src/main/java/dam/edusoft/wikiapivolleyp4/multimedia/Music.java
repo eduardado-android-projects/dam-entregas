@@ -1,4 +1,4 @@
-package dam.edusoft.wikiapivolleyp4.music;
+package dam.edusoft.wikiapivolleyp4.multimedia;
 
 import android.content.Context;
 import android.media.MediaPlayer;

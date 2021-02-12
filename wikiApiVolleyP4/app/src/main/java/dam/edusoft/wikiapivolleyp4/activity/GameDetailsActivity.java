@@ -1,4 +1,4 @@
-package dam.edusoft.wikiapivolleyp4.Activity;
+package dam.edusoft.wikiapivolleyp4.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,11 +27,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_details);
 
         //GUI
-        imageViewGamecover = findViewById(R.id.imageViewPhoto);
-        textViewTitle = findViewById(R.id.textViewTitle);
-        textViewYear = findViewById(R.id.textViewYear);
-        textViewDeveloper = findViewById(R.id.textViewDeveloper);
-        textViewGameName = findViewById(R.id.textViewTitle);
+
     }
 
     private void recogerIntent(){

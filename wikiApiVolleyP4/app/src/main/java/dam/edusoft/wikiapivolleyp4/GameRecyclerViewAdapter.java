@@ -18,13 +18,15 @@ import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 
 public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
 
-    private static final String TAG = "GameListAdapter";
-    private final LinkedList<Game> mGameLinkedList;
-    private LayoutInflater mLayoutInflater;
-    private Context mContext;
-    private OnGameListenerInterface mOnGameListenerInterface;
+    private final LinkedList<Game> mGameLinkedList; // data
+    private LayoutInflater mLayoutInflater; // inflater
+    private Context mContext; // Activity
+    private OnGameListenerInterface mOnGameListenerInterface; //interfaz que implementaremos fuera (modular)
 
-    //The constructor receives the Activity and the data
+
+    //debugging
+    private static final String TAG = "GameListAdapter";
+
     public GameRecyclerViewAdapter(Context context, LinkedList<Game> gameLinkedList, OnGameListenerInterface onGameListener) {
         mLayoutInflater = LayoutInflater.from(context); //load the inflater using the Activity
         this.mGameLinkedList = gameLinkedList; //assign data reference to the adapter
@@ -70,9 +72,9 @@ public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerVi
 
         final GameRecyclerViewAdapter mGameListAdapter; //A reference to the adapter
 
-        public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListenerInterface onGameListener) {
+        public GameViewHolder(@NonNull View itemView, GameRecyclerViewAdapter gameListAdapter, OnGameListenerInterface onGameListenerInterface) {
             super(itemView);
-            this.onGameListenerInterface = onGameListener;
+            this.onGameListenerInterface = onGameListenerInterface;
 
             mImageViewCover = itemView.findViewById(R.id.imageViewGameCover);
             mTextViewTitle = itemView.findViewById(R.id.textViewTitle);

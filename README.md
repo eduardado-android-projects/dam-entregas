@@ -179,6 +179,7 @@ IntentReceiverPractica3
 </details>
 
 ### Hacer cada ítem del RecyclerView clickable
+
 1. Dentro de la clase adaptadora "GameRecyclerViewAdapter", definimos una interfaz "OngameListener", que define un método "onGameClick()" que deberá ser implementado por aquella clase que implemente esta interfaz. Nótese que este último método recibirá por parámetro un Integer, que corresponde a la posición del ítem en el que estamos haciendo click dentro del LinkedList que contiene los datos.
   ```java
   public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerViewAdapter.GameViewHolder> {
@@ -277,7 +278,18 @@ mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
     }
    
    ```
-    
+### Recapitulación: ¿qué ocurre en ejecución?
+
+1. La clase de lanzamiento, GameListMainActivity, implementa la interfaz GameRecyclerViewAdapter.OnGameListenerInterface.
+   1. Espera recibir una posición 
+   2. Crea un intent hacia otra actividad
+   3. Obtiene la posición del objeto que está siendo pulsado.
+   4. Obtiene el objeto del LinkedList a partir de dicha posición
+   5. Manda dicho objeto en el Intent a otra actividad
+2. ¿ Por qué recibe la posición el método onGameClick(Integer position)?
+   1. La clase ViewHolder del adaptador implementa la el listener OnClick
+   2. Cada ítem del ViewHolder, recibe el listener en el constructor de su clase por lo que estará "escuchando los clicks"
+   3. Cuando el usuario hace click en cualquier ítem, la clase ViewHolder a través del método getAdapterPosition() le pasa al método onGamkeClick() de la interfaz, la posición del ítem que está siendo clicado.
 
 
 <details>
