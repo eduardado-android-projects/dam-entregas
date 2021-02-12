@@ -14,6 +14,14 @@ import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
 import dam.edusoft.wikiapivolleyp4.IntentNames;
 import dam.edusoft.wikiapivolleyp4.R;
 import dam.edusoft.wikiapivolleyp4.multimedia.Music;
@@ -26,6 +34,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     TextView textViewYear;
     TextView textViewDeveloper;
     ImageView imageViewGamePhoto;
+    TextView textViewWikipediaPetitionResult;
 
     MediaPlayer mediaPlayer;
 
@@ -43,6 +52,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         textViewDeveloper = findViewById(R.id.textViewGameDeveloper);
         textViewYear = findViewById(R.id.textViewGameYear);
         imageViewGamePhoto = findViewById(R.id.imageViewGamePhoto);
+        textViewWikipediaPetitionResult = findViewById(R.id.textViewWikipediaPetitionResult);
 
 
         //capturamos el Intent
@@ -76,5 +86,12 @@ public class GameDetailsActivity extends AppCompatActivity {
         if(mediaPlayer != null && mediaPlayer.isPlaying()){
             mediaPlayer.stop();
         }
+    }
+
+    public void wiki(View view) {
+        /*String peticionHttp = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + gameReplaced + "&limit=11&namespace=0&format=json";*/
+
+
+
     }
 }

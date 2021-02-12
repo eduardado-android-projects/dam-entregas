@@ -17,43 +17,38 @@
 
     <TextView
             android:id="@+id/textViewGameTitle"
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="18dp"
             app:layout_constraintStart_toEndOf="@+id/imageViewGamePhoto"
-            android:layout_marginStart="24dp" />
+            style="@style/detalle" />
 
     <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="22dp"
             android:id="@+id/textViewGameYear"
+            android:layout_width="227dp"
+            android:layout_height="39dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/textViewGameTitle"
             app:layout_constraintStart_toEndOf="@+id/imageViewGamePhoto"
-            android:layout_marginStart="24dp" />
+            android:layout_marginStart="24dp"
+            style="@style/detalle" />
 
     <TextView
-            android:text="TextView"
-            android:layout_width="0dp"
-            android:layout_height="22dp"
+            android:layout_width="225dp"
+            android:layout_height="34dp"
             android:id="@+id/textViewGameDeveloper"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/textViewGameYear"
             app:layout_constraintStart_toEndOf="@+id/imageViewGamePhoto"
-            android:layout_marginStart="24dp" />
+            android:layout_marginStart="24dp"
+            style="@style/detalle" />
 
     <ImageButton
-            android:layout_width="117dp"
-            android:layout_height="111dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:srcCompat="@drawable/ic_baseline_play_circle_24"
             android:id="@+id/imageButtonPlayGameSong"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,11 +56,12 @@
             app:layout_constraintEnd_toStartOf="@+id/imageButtonStopGameSong"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="150dp"
-            android:onClick="play"/>
+            android:onClick="play"
+            android:padding="30dp"/>
 
     <ImageButton
-            android:layout_width="117dp"
-            android:layout_height="111dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:srcCompat="@drawable/ic_baseline_stop_24"
             android:id="@+id/imageButtonStopGameSong"
             app:layout_constraintStart_toEndOf="@+id/imageButtonPlayGameSong"
@@ -76,21 +72,21 @@
             android:onClick="stop"/>
 
     <ImageButton
-            android:layout_width="117dp"
-            android:layout_height="111dp"
             android:id="@+id/imageButtonWikipedia"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:srcCompat="@drawable/ic_baseline_menu_book_24"
             app:layout_constraintStart_toEndOf="@+id/imageButtonStopGameSong"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="150dp" />
+            android:layout_marginTop="150dp"
+            android:onClick="wiki"/>
 
     <TextView
-            android:text="TextView"
             android:padding="20dp"
             android:background="@color/yellow"
-            android:layout_width="375dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/textViewWikipediaPetitionResult"
             android:layout_marginEnd="16dp"
@@ -98,6 +94,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButtonStopGameSong" />
+            app:layout_constraintTop_toBottomOf="@+id/imageButtonStopGameSong"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
