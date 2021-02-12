@@ -30,20 +30,6 @@ public class Game implements Parcelable {
         songName = in.readString();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(developer);
-        dest.writeString(yearRelease);
-        dest.writeString(urlPhoto);
-        dest.writeString(songName);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator<Game> CREATOR = new Creator<Game>() {
         @Override
         public Game createFromParcel(Parcel in) {
@@ -55,6 +41,21 @@ public class Game implements Parcelable {
             return new Game[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(developer);
+        dest.writeString(yearRelease);
+        dest.writeString(urlPhoto);
+        dest.writeString(songName);
+    }
+
 
     public String getName() {
         return name;

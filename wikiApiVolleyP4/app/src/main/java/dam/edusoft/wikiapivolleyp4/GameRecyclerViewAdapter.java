@@ -87,7 +87,8 @@ public class GameRecyclerViewAdapter extends RecyclerView.Adapter<GameRecyclerVi
 
         @Override
         public void onClick(View v) {
-            onGameListenerInterface.onGameClick(getAdapterPosition());
+            onGameListenerInterface.onGameClick(getAdapterPosition()); //ejecutamos el método de la interfaz pasándole la posición del objeto que se está clicando
+            //onGameClick estará definido en la implementación, ya sea en otra Activity, en otra clase etc.
         }
 
     }

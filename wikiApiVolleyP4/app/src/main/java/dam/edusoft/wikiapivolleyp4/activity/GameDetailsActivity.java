@@ -2,22 +2,34 @@ package dam.edusoft.wikiapivolleyp4.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
+
+import dam.edusoft.wikiapivolleyp4.IntentNames;
 import dam.edusoft.wikiapivolleyp4.R;
+import dam.edusoft.wikiapivolleyp4.multimedia.Music;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 
 public class GameDetailsActivity extends AppCompatActivity {
     private Game mGame;
 
-    private ImageView imageViewGamecover;
-    private TextView textViewTitle;
-    private TextView textViewYear;
-    private TextView textViewDeveloper;
-    private TextView textViewGameName;
+    TextView textViewTitle;
+    TextView textViewYear;
+    TextView textViewDeveloper;
+    ImageView imageViewGamePhoto;
+
+    MediaPlayer mediaPlayer;
+
+    private static final String TAG = "GameDetailsActivity";
 
 
 
@@ -26,30 +38,43 @@ public class GameDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_details);
 
-        //GUI
+        //GUI referencias
+        textViewTitle = findViewById(R.id.textViewGameTitle);
+        textViewDeveloper = findViewById(R.id.textViewGameDeveloper);
+        textViewYear = findViewById(R.id.textViewGameYear);
+        imageViewGamePhoto = findViewById(R.id.imageViewGamePhoto);
 
-    }
 
-    private void recogerIntent(){
-        if(getIntent().hasExtra("game")){
-            Game game= getIntent().getParcelableExtra("game");
-            populateGUI(game);
+        //capturamos el Intent
+        if(getIntent().hasExtra(IntentNames.GAME_SELECTED)){ //nos aseguramos  antes de recoger el intent de que tiene adjunto el extra que esperemos
+            mGame = getIntent().getParcelableExtra(IntentNames.GAME_SELECTED);
+            Log.d(TAG, "onCreate: " + mGame.getName());
+
+            populateLayout();
         }
+
+
     }
 
-    private void populateGUI(Game game) {
-         String imageViewGamecoverText = game.getUrlPhoto();
+    private void populateLayout() {
+        textViewTitle.setText(mGame.getName());
+        textViewDeveloper.setText(mGame.getDeveloper());
+        textViewYear.setText(mGame.getYearRelease());
+        Glide.with(this)
+                .load(mGame.getUrlPhoto())
+                .into(imageViewGamePhoto);
+    }
 
-         String textViewTitleText = game.getName();
-         String textViewYearText = game.getYearRelease();
-         String textViewDeveloperText = game.getDeveloper();
-         String textViewGameNameText = game.getName();
 
-        //imageViewGamecover.setText();
+    public void play(View view) {
+        Music music = new Music(this);
+        mediaPlayer = music.getSong(mGame.getSongName());
+        mediaPlayer.start();
+    }
 
-        textViewTitle.setText(textViewTitleText);
-        textViewYear.setText(textViewYearText);
-        textViewDeveloper.setText(textViewDeveloperText);
-        textViewGameName.setText(textViewGameNameText);
+    public void stop(View view) {
+        if(mediaPlayer != null && mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+        }
     }
 }

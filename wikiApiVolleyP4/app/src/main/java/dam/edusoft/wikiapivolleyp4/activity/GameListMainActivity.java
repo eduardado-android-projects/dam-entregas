@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import java.util.LinkedList;
 
 import dam.edusoft.wikiapivolleyp4.GameRecyclerViewAdapter;
+import dam.edusoft.wikiapivolleyp4.IntentNames;
 import dam.edusoft.wikiapivolleyp4.R;
 import dam.edusoft.wikiapivolleyp4.persistence.model.Game;
 import dam.edusoft.wikiapivolleyp4.service.GameService;
@@ -65,10 +66,12 @@ public class GameListMainActivity extends AppCompatActivity  implements GameRecy
          */
         Log.d(TAG, "onGameClick: Has hecho click en el juego : " + mGameLinkedList.get(position).getName());
 
-        Game game = mGameLinkedList.get(position); //el objeto que se mandará en el intent a la otra Activity
+        Game selectedGame = mGameLinkedList.get(position); //el objeto que se mandará en el intent a la otra Activity
+
+        /*Intent intent = new Intent(this, GameDetailsActivity.class);*/
 
         Intent intent = new Intent(this, GameDetailsActivity.class);
-       /* intent.putExtra("dam.edusoft.wikiapivolleyp4.game",game); //*/
+        intent.putExtra(IntentNames.GAME_SELECTED, selectedGame);
 
         startActivity(intent);
 

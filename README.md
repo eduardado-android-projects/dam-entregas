@@ -174,11 +174,19 @@ IntentReceiverPractica3
 <details>
 <summary>Explicaciones</summary>
 
+<details>
+<summary>Hacer cada ítem del RecyclerView clickable usando una interfaz</summary>
 
- 
-</details>
+### Hacer cada ítem del RecyclerView clickable usando una interfaz
 
-### Hacer cada ítem del RecyclerView clickable
+#### Resumen
+
+1. Implementamos OnClickListener en el ViewHolder
+2. Definimos una interfaz con un método que seleccione un objeto Game
+3. Implementamos la interfaz en nuestro Activity
+4. Le pasamos la interfaz al constructor del adaptador
+
+#### Paso a paso
 
 1. Dentro de la clase adaptadora "GameRecyclerViewAdapter", definimos una interfaz "OngameListener", que define un método "onGameClick()" que deberá ser implementado por aquella clase que implemente esta interfaz. Nótese que este último método recibirá por parámetro un Integer, que corresponde a la posición del ítem en el que estamos haciendo click dentro del LinkedList que contiene los datos.
   ```java
@@ -278,7 +286,7 @@ mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
     }
    
    ```
-### Recapitulación: ¿qué ocurre en ejecución?
+#### Recapitulación: ¿qué ocurre en ejecución?
 
 1. La clase de lanzamiento, GameListMainActivity, implementa la interfaz GameRecyclerViewAdapter.OnGameListenerInterface.
    1. Espera recibir una posición 
@@ -290,6 +298,18 @@ mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
    1. La clase ViewHolder del adaptador implementa la el listener OnClick
    2. Cada ítem del ViewHolder, recibe el listener en el constructor de su clase por lo que estará "escuchando los clicks"
    3. Cuando el usuario hace click en cualquier ítem, la clase ViewHolder a través del método getAdapterPosition() le pasa al método onGamkeClick() de la interfaz, la posición del ítem que está siendo clicado.
+</details>
+
+<<details>
+<summary>Pasar informacion de una Activity a otra Usando Parcelable Objects + Intents</summary>
+
+
+</details>>
+
+ 
+</details>
+
+
 
 
 <details>
@@ -298,7 +318,7 @@ mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(
 - [x] Hacer los ítem más sencillos: nombre + foto.
 - [x] User Gridlayout Manager en lugar de LinearLayoutManager
 - [x] Al pulsar el ítem te lleva a otra Activity con los detalles.
-- [ ] Implementar el listener usando una interfaz (buenas prácticas)
+- [x] Implementar el listener usando una interfaz (buenas prácticas)
 - [ ] El Activity con detalles muestra Foto, Nombre y además año, desarrollador
 - [ ] El Activity detalles tiene un botón que, al pulsarlo, se consulta a la Wikipedia. La wikipedia devuelve un JSON que se mostrará en un textView abajo.
 
@@ -337,3 +357,9 @@ NotificactionChannel
 NotificationManager
 Activity: getSystemService()
 </details>
+
+## Pasar informacion de una Activity a otra Usando Parcelable Objects + Intents
+
+1. Implementar la interfaz Parcelable en el objeto
+   1. Implementar los métodos
+   2. Añadir implementación de Parcelable
